@@ -40,7 +40,7 @@
 
 
   imports = [
-    ./desktop-fix.nix
+    ./desktop-fix
   ];
 
 

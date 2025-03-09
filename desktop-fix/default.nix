@@ -1,10 +1,19 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
-  programs.bash.profileExtra = lib.mkAfter ''
-    rm -rf ${config.home.homeDirectory}/.local/share/applications/home-manager
-    rm -rf ${config.home.homeDirectory}/.icons/nix-icons
-    ls ${config.home.homeDirectory}/.nix-profile/share/applications/*.desktop > ${config.home.homeDirectory}/.cache/current_desktop_files.txt
-  '';
+  systemd.user.services.reset-desktop = {
+    Unit = {
+      Description = "Reset desktop entries";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.callPackage ./reset-desktop.nix {path = config.home.homeDirectory;} }";
+    };
+  };
+  # programs.bash.profileExtra = lib.mkAfter ''
+  #   echo loading profile
+  # '';
   home.activation = {
     linkDesktopApplications = {
       after = ["writeBoundary" "createXdgUserDirectories"];
