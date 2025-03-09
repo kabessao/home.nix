@@ -123,6 +123,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1;
   };
 
   # systemd.user.timers."calendario" = {
