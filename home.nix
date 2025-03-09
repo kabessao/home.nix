@@ -41,6 +41,7 @@
 
   imports = [
     ./desktop-fix
+    ./packages.nix
   ];
 
 
@@ -88,81 +89,6 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # environment.
-  home.packages = with pkgs; [
-
-    bitwarden-desktop
-    blesh
-    discordchatexporter-cli
-    hollywood
-    lazygit
-    vesktop
-    firefox
-    kitty
-    ferdium
-    nvtopPackages.full
-    headsetcontrol
-    vlc
-    desktop-file-utils
-    gnome-tweaks
-    chromium
-    gnome-extension-manager
-    xclip
-    libgda
-    gsound
-    vscode
-    gamemode
-    gamescope
-    flameshot
-    obs-studio
-    clonehero
-    jq
-    distrobox
-    podman
-    unzip
-    bottles
-    go
-    ripgrep
-    steam-run
-    playwright-driver
-    hmcl
-    kdenlive
-    libnotify
-    unstable.dolphin-emu
-    openvpn
-    gum
-    speedtest-cli
-    stremio
-
-    gnomeExtensions.gsconnect
-    (callPackage ./gnome-pano {})
-
-    (callPackage ./chatterino2 {})
-
-    unstable.ghostty
-
-    (pkgs.nerdfonts.override { fonts = [ "DroidSansMono" ]; })
-
-    (pkgs.writeShellScriptBin "nv" ''
-      ${neovim}/bin/nvim -u "${neovim-config}/init.lua $@"
-    '')
-
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
