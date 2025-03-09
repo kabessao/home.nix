@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-config = {
       url = "github:kabessao/kickstart.nvim";
       flake = false;
@@ -26,6 +31,7 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         unstable = args.unstable.legacyPackages.${system};
+        zen-browser = args.zen-browser.packages.${system};
       in
       {
 
@@ -37,6 +43,7 @@
           extraSpecialArgs = {
             inherit neovim-config;
             inherit unstable;
+            inherit zen-browser;
           };
 
           # Specify your home configuration modules here, for example,

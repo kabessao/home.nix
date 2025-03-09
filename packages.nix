@@ -1,4 +1,4 @@
-{pkgs, unstable, neovim-config, ...}:
+{pkgs, unstable, neovim-config, zen-browser, ...}:
 
 {
   home.packages = with pkgs; [
@@ -51,6 +51,8 @@
     dconf-editor
     yt-dlp
     obsidian
+
+    zen-browser.twilight 
 
     gnomeExtensions.gsconnect
     gnomeExtensions.pano
