@@ -7,7 +7,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     flake-utils.url = "github:numtide/flake-utils";
 
-    unstable-pkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -21,11 +21,11 @@
 
   };
 
-  outputs = { nixpkgs, home-manager, neovim-config, unstable-pkgs, flake-utils, ... }:
+  outputs = { nixpkgs, home-manager, neovim-config, flake-utils, ... }@args:
     flake-utils.lib.eachDefaultSystemPassThrough (system: 
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        unstable = unstable-pkgs.legacyPackages.${system};
+        unstable = args.unstable.legacyPackages.${system};
       in
       {
 
