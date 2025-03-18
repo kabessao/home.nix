@@ -6,7 +6,7 @@ in
 	options.mylanguage = {
 
 		enable = lib.mkOption {
-			deafult = true;
+			default = true;
 			type = lib.types.bool;
 			description = "Enables my language configurations, which is a mix of pt-BR and en-US.";
 		};
