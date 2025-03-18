@@ -13,7 +13,7 @@ in
 
 		extraConfig = lib.mkOption {
 			default = "";
-			type = lib.types.string;
+			type = lib.types.str;
 			description = "Extra options for Blesh";
 		};
 
