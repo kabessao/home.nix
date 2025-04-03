@@ -24,16 +24,16 @@ in
 		programs.nushell = {
 
 			extraConfig = with pkgs; lib.mkAfter ''
-				def ranger-nu [] {
+				# Navigates through folders using ranger.
+				# Drops you in the same folder you had open before quitting
+				def --env --wrapped r [...args]: nothing -> nothing {
 					let temp_file = (mktemp -t "ranger_cd.XXXXXXXXXX")
-					${ranger}/bin/ranger --choosedir $temp_file
-					let $temp_dir = (cat $temp_file)
+					${ranger}/bin/ranger --choosedir $temp_file ...$args
+					cd (cat $temp_file)
 					rm -rf $temp_file
-					echo $temp_dir
 				}
 				'';
 
-			shellAliases.r = ''cd (ranger-nu)'';
 		};
 
 	};
