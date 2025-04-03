@@ -4,11 +4,13 @@ let
 in
 {
 	options.myessentials = {
+
 		enable = lib.mkOption {
 			default = true;
 			type = lib.types.bool;
 			description = "Installed essential packages";
 		};
+
 	};
 
 	config = lib.mkIf self.enable {
@@ -43,6 +45,10 @@ in
 			pavucontrol
 			vlc
 			zen-browser.twilight 
+
+			(writeShellScriptBin "nixwhere" ''
+				which $@ | xargs -I {} readlink -f {}
+			'')
 
 		];
 	};
