@@ -22,6 +22,12 @@ in
 			description = "Package to be used. Default is from the Unstable branch";
 		};
 
+		cdw.workspaceFolder = lib.mkOption {
+			default = "~/";
+			type = lib.types.string;
+			description = "Folder where the workspace is located.";
+		};
+
 	};
 
 	config = lib.mkIf config.mynushell.enable {
@@ -32,6 +38,18 @@ in
 		programs.nushell = {
 			enable = true;
 			package = self.package;
+
+			extraConfig = lib.mkAfter ''
+				# Navigates back until it reaches the root of a git repository
+				# if none is found it goes to ${self.cdw.workspaceFolder}
+				def --env cdw []: nothing -> nothing  {
+					if (git status | complete | get exit_code) == 0 {
+						cd (git rev-parse --show-toplevel)
+					} else {
+						cd ${self.cdw.workspaceFolder}
+					}
+				}
+				'';
 
 			shellAliases = {
 				o = "xdg-open";
