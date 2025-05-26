@@ -24,7 +24,7 @@ in
 
 		cdw.workspaceFolder = lib.mkOption {
 			default = "~/";
-			type = lib.types.string;
+			type = lib.types.str;
 			description = "Folder where the workspace is located.";
 		};
 
