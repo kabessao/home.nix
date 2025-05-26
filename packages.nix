@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
 
     hollywood
-    nvtopPackages.full
     gamemode
     gamescope
     clonehero
@@ -16,16 +15,15 @@
     unstable.dolphin-emu
     speedtest-cli
     stremio
-    youtube-music
     yt-dlp
     translate-shell
+    oversteer
+    mangohud
 
     gnomeExtensions.gsconnect
     gnomeExtensions.pano
 
-    (callPackage ./chatterino2 {})
-
-    unstable.ghostty
+    (callPackage ./chatterino2 {pkgs = unstable;})
 
     (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
 
