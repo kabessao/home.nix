@@ -1,18 +1,18 @@
 {
 pkgs ? import<nixpkgs> {},
-fetchFromGitHub ? pkgs.fetchFromGithub,
 ...
 }:
 
-pkgs.chatterino2.overrideAttrs (oldAttrs: rec {
-		pname = "chatterino2";
-		version = "2.5.2";
-		src = fetchFromGitHub {
-			owner = "Chatterino";
-			repo = pname;
-			rev = "v${version}";
-			hash = "sha256-nrw4dQ7QjPPMbZXMC+p3VgUQKwc1ih6qS13D9+9oNuw=";
-			fetchSubmodules = true;
-		};
-		patches = [ ./chatterino-nix.patch ];
-})
+pkgs.stdenv.mkDerivation {
+	pname = "chatterino2";
+	name = "chatterino2";
+	src = "${pkgs.chatterino2}";
+	
+	buildPhase = ''
+		cp -r $src $out
+
+		substituteInPlace $out/share/applications/com.chatterino.chatterino.desktop \
+			--replace "Exec=chatterino" "Exec=env QT_QPA_PLATFORM=xcb chatterino" # fixes freeze happening in PaperWM
+
+	'';
+}
