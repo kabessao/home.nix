@@ -1,4 +1,4 @@
-{pkgs, zen-browser, lib, config, ...}:
+{pkgs, zen-browser, lib, config, unstable, ...}:
 let
   self = config.myessentials;
 in
@@ -45,6 +45,8 @@ in
 			pavucontrol
 			vlc
 			zen-browser.twilight 
+			unstable.ghostty
+			youtube-music
 
 			(writeShellScriptBin "nixwhere" ''
 				which $@ | xargs -I {} readlink -f {}
