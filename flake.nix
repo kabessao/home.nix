@@ -4,13 +4,13 @@
   inputs = {
 
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     flake-utils.url = "github:numtide/flake-utils";
 
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -20,18 +20,18 @@
     };
 
     neovim-config = {
-      url = "github:kabessao/kickstart.nvim";
-      flake = false;
+      url = "github:kabessao/kickstart.nvim/nixCats";
     };
 
   };
 
-  outputs = { nixpkgs, home-manager, neovim-config, flake-utils, ... }@args:
+  outputs = { nixpkgs, home-manager, flake-utils, ... }@args:
     flake-utils.lib.eachDefaultSystemPassThrough (system: 
       let
         pkgs = nixpkgs.legacyPackages.${system};
         unstable = args.unstable.legacyPackages.${system};
         zen-browser = args.zen-browser.packages.${system};
+        neovim-config = args.neovim-config.packages.${system};
       in
       {
 
