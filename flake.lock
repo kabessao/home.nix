@@ -66,11 +66,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1749536559,
-        "narHash": "sha256-xzwx9Lc7kPR0eJ1jsGL+WgTLbT5JJ5n40eGrLbw8wRA=",
+        "lastModified": 1752369552,
+        "narHash": "sha256-e1r3fEIJMIabSoFLazpfwt90h4/C1WNfa8qyyxQHr3A=",
         "owner": "kabessao",
         "repo": "kickstart.nvim",
-        "rev": "0152ffb6f43350a7b49c2fad0fe271dd913d9c10",
+        "rev": "6accaaab5335a875a311b8a6825a074299a38d20",
         "type": "github"
       },
       "original": {
@@ -176,11 +176,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1750649182,
-        "narHash": "sha256-beNAQ63SY8HxBsFdMGv/fdLzjQMYgifMh1DcmaIzMjo=",
+        "lastModified": 1751656595,
+        "narHash": "sha256-W8uTfv+XXSupH4IFIV+SjTCCQXBiHtxTRkuypuDhlV4=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "c0785a69fe3988b4ef44c74575f4a2f698f91f32",
+        "rev": "565138cfe80944643770b6b4f4ac849dc94ab343",
         "type": "github"
       },
       "original": {
