@@ -1,6 +1,7 @@
 {pkgs, zen-browser, lib, config, unstable, ...}:
 let
   self = config.myessentials;
+	cfg = config;
 in
 {
 	options.myessentials = {
@@ -13,7 +14,14 @@ in
 
 	};
 
+
 	config = lib.mkIf self.enable {
+
+		programs.zoxide = {
+			enable = true;
+			enableBashIntegration = true;
+		}; 
+
 		home.packages = with pkgs; [
 
 			bitwarden-desktop
