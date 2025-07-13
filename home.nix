@@ -16,6 +16,12 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   targets.genericLinux.enable = true;
 
   # Home Manager needs a bit of information about you and the paths it should
