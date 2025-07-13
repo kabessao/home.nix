@@ -3,6 +3,8 @@
 {
   home.packages = with pkgs; [
 
+    (pkgs.callPackage ./patchedPackages/window-is-ready.nix {} )
+
     hollywood
     gamemode
     gamescope
@@ -19,13 +21,12 @@
     translate-shell
     oversteer
     mangohud
+    neovim-config.nvim
 
     gnomeExtensions.gsconnect
     gnomeExtensions.pano
 
     (callPackage ./chatterino2 {pkgs = unstable;})
-
-    (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
 
     (writeScriptBin "get-comments" ''
       ${yt-dlp}/bin/yt-dlp --write-comments --no-download $@
