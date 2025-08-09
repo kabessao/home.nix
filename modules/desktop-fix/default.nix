@@ -30,7 +30,7 @@ in
       linkDesktopApplications = {
         after = ["writeBoundary" "createXdgUserDirectories"];
         before = [];
-        data = ''
+        data = /*bash*/ ''
           rm -rf ${config.home.homeDirectory}/.local/share/applications/home-manager
           rm -rf ${config.home.homeDirectory}/.icons/nix-icons
           mkdir -p ${config.home.homeDirectory}/.local/share/applications/home-manager
