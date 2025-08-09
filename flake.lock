@@ -66,11 +66,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1753084421,
-        "narHash": "sha256-xGNKahyGo/BnWfzNTc7LHFJvtnYApK360Xxv1zrWWsM=",
+        "lastModified": 1753283916,
+        "narHash": "sha256-y/CV3/vKwxbpuRBBZ8Me5DTnD3Nu2N7LG940yICxlgU=",
         "owner": "kabessao",
         "repo": "kickstart.nvim",
-        "rev": "fd8bec3b9ed934a2b50c41e22e418cfa938c73b0",
+        "rev": "fdfa6410bc3f7b609677e88b8f523f03bb3e2091",
         "type": "github"
       },
       "original": {
