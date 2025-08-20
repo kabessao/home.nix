@@ -13,7 +13,7 @@
     go
     playwright-driver
     hmcl
-    kdenlive
+    kdePackages.kdenlive
     unstable.dolphin-emu
     speedtest-cli
     stremio
