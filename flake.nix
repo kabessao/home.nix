@@ -23,6 +23,10 @@
       url = "github:kabessao/kickstart.nvim/nixCats";
     };
 
+    niri = {
+      url = "github:YaLTeR/niri";
+    };
+
   };
 
   outputs = { nixpkgs, home-manager, flake-utils, ... }@args:
@@ -32,6 +36,7 @@
         unstable = args.unstable.legacyPackages.${system};
         zen-browser = args.zen-browser.packages.${system};
         neovim-config = args.neovim-config.packages.${system};
+        niri = args.niri.packages.${system};
       in
       {
 
@@ -44,6 +49,7 @@
             inherit neovim-config;
             inherit unstable;
             inherit zen-browser;
+            inherit niri;
           };
 
           # Specify your home configuration modules here, for example,

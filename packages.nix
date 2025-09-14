@@ -1,7 +1,10 @@
 {pkgs, unstable, neovim-config, zen-browser, ...}:
+{pkgs, unstable, neovim-config, niri, ...}:
 
 {
   home.packages = with pkgs; [
+
+    niri.niri
 
     (pkgs.callPackage ./patchedPackages/window-is-ready.nix {} )
 
@@ -23,6 +26,8 @@
     mangohud
     neovim-config.nvim
 
+    (callPackage ./customPackages/cosmic-ext-alternative-startup.nix {} )
+    
     gnomeExtensions.gsconnect
     gnomeExtensions.pano
 

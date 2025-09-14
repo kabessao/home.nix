@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
-{
+rec {
 
   imports = [
     ./packages.nix
@@ -37,8 +37,9 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
-
     ".fonts.conf".source = ./fonts.conf;
+
+    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${home.homeDirectory}/.config/home-manager/config/niri.kdl";
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
