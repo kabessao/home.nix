@@ -25,6 +25,7 @@
     oversteer
     mangohud
     neovim-config.nvim
+    nvtopPackages.nvidia
 
     (callPackage ./customPackages/cosmic-ext-alternative-startup.nix {} )
     
