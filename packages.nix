@@ -26,6 +26,7 @@
     mangohud
     neovim-config.nvim
     nvtopPackages.nvidia
+    protontricks
 
     (callPackage ./customPackages/cosmic-ext-alternative-startup.nix {} )
     
