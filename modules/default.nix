@@ -8,6 +8,7 @@
 		./gnome
 		./language
 		./essentials
+		./niri
 
 	];
 }

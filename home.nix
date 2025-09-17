@@ -4,12 +4,16 @@ rec {
 
   imports = [
     ./packages.nix
-    ./modules
   ];
 
   nixpkgs.config.allowUnfree = true;
 
   mygnome.enable = true;
+
+  myniri = {
+    enable = true;
+    configFile = config.lib.file.mkOutOfStoreSymlink "${home.homeDirectory}/.config/home-manager/config/niri.kdl";
+  };
 
   nix = {
     package = pkgs.nix;
@@ -32,8 +36,6 @@ rec {
     # ".screenrc".source = dotfiles/screenrc;
 
     ".fonts.conf".source = ./fonts.conf;
-
-    ".config/niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "${home.homeDirectory}/.config/home-manager/config/niri.kdl";
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''

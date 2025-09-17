@@ -1,10 +1,7 @@
-{pkgs, unstable, neovim-config, zen-browser, ...}:
-{pkgs, unstable, neovim-config, niri, ...}:
+{pkgs, unstable, neovim-config, ...}:
 
 {
   home.packages = with pkgs; [
-
-    niri.niri
 
     (pkgs.callPackage ./patchedPackages/window-is-ready.nix {} )
 
