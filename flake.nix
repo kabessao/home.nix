@@ -11,7 +11,6 @@
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     neovim-config.url = "github:kabessao/kickstart.nvim/nixCats";
-    niri.url = "github:YaLTeR/niri";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -28,7 +27,6 @@
         unstable = args.unstable.legacyPackages.${system};
         zen-browser = args.zen-browser.packages.${system};
         neovim-config = args.neovim-config.packages.${system};
-        niri = args.niri.packages.${system};
         modules = ./modules;
       in
 
@@ -44,8 +42,7 @@
           extraSpecialArgs = {
             inherit neovim-config
                     unstable
-                    zen-browser
-                    niri;
+                    zen-browser;
           };
 
           # Specify your home configuration modules here, for example,

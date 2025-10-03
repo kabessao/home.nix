@@ -248,11 +248,13 @@ layout {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
-// spawn-at-startup "cosmic-ext-alternative-startup"
+
+spawn-at-startup "cosmic-ext-alternative-startup"
 
 spawn-at-startup "cosmic-panel"
 spawn-at-startup "cosmic-osd"
 spawn-at-startup "cosmic-notifications"
+// spawn-at-startup "xwayland-satellite"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -341,7 +343,7 @@ binds {
     Mod+T { spawn "ghostty"; }
     Mod+d { spawn "cosmic-launcher"; }
     Mod+Space { spawn "cosmic-launcher"; }
-    Super+Alt+L { spawn "swaylock"; }
+    // Super+Alt+L { spawn "swaylock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -394,10 +396,10 @@ binds {
     Mod+Alt+Down  { focus-monitor-down; }
     Mod+Alt+Up    { focus-monitor-up; }
     Mod+Alt+Right { focus-monitor-right; }
-    Mod+Alt+H     { focus-monitor-left; }
+    Super+Alt+H     { focus-monitor-left; }
     Mod+Alt+J     { focus-monitor-down; }
     Mod+Alt+K     { focus-monitor-up; }
-    Mod+Alt+L     { focus-monitor-right; }
+    Super+Alt+L     { focus-monitor-right; }
 
     Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
@@ -407,6 +409,12 @@ binds {
     Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
     Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+
+    Super+Alt+Ctrl+Left  { move-workspace-to-monitor-left; }
+    Super+Alt+Ctrl+Right { move-workspace-to-monitor-right; }
+    Super+Alt+Ctrl+h     { move-workspace-to-monitor-left; }
+    Super+Alt+Ctrl+l     { move-workspace-to-monitor-right; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
@@ -516,7 +524,7 @@ binds {
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
+    Mod+Alt+F { fullscreen-window; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".

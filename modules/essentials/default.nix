@@ -57,12 +57,6 @@ in
 {
 	options.myessentials = {
 
-		programs.direnv = {
-			enable = true;
-			enableBashIntegration = true;
-			nix-direnv.enable = true;
-		};
-
 		enable = lib.mkOption {
 			default = true;
 			type = lib.types.bool;
@@ -79,6 +73,12 @@ in
 	};
 
 	config = lib.mkIf self.enable {
+
+		programs.direnv = {
+			enable = true;
+			enableBashIntegration = true;
+			nix-direnv.enable = true;
+		};
 
 		programs.zoxide = {
 			enable = true;

@@ -21,7 +21,7 @@ in
 
 		configFile = lib.mkOption {
 			default = "";
-			type = lib.types.str;
+			type = lib.types.path;
 			description = "path to the config file";
 		};
 		
@@ -30,13 +30,12 @@ in
 	config = lib.mkIf self.enable {
 
 		home.packages = with pkgs; [
-			niri.niri
 			(callPackage ./cosmic-ext-alternative-startup.nix {} )
 		];
 
 		home.file = 
 			let
-				path = assert lib.assertMsg (self.configFile != "") "You need to set the config path for Niri with myniri.configFile"; self.home ; 
+				path = assert lib.assertMsg (self.configFile != null) "You need to set the config path for Niri with myniri.configFile"; self.configFile ; 
 			in
 			{
 				".config/niri/config.kdl".source = path;
