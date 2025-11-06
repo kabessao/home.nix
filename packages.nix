@@ -25,9 +25,6 @@
     nvtopPackages.nvidia
     protontricks
     
-    gnomeExtensions.gsconnect
-    gnomeExtensions.pano
-
     (callPackage ./chatterino2 {pkgs = unstable;})
 
     (writeScriptBin "get-comments" ''

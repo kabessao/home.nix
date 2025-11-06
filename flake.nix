@@ -7,6 +7,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     flake-utils.url = "github:numtide/flake-utils";
 
+    # Separate repo for just gnome extensions
+    extensions.url = "github:nixos/nixpkgs/1cb1c02a6b1b7cf67e3d7731cbbf327a53da9679"; 
+
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -27,6 +30,7 @@
         unstable = args.unstable.legacyPackages.${system};
         zen-browser = args.zen-browser.packages.${system};
         neovim-config = args.neovim-config.packages.${system};
+        extensions = args.extensions.legacyPackages.${system};
         modules = ./modules;
       in
 
@@ -42,7 +46,8 @@
           extraSpecialArgs = {
             inherit neovim-config
                     unstable
-                    zen-browser;
+                    zen-browser
+                    extensions;
           };
 
           # Specify your home configuration modules here, for example,

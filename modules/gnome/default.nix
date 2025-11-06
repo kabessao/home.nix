@@ -1,4 +1,4 @@
-{pkgs, lib, config, ... }:
+{pkgs, lib, config, extensions, system, ... }:
 let
   self = config.mygnome;
 in 
@@ -18,6 +18,26 @@ in
 	config = lib.mkIf self.enable {
 		
 		desktop-fix.enable = lib.mkDefault true;
+
+		home.packages = with pkgs.gnomeExtensions; lib.mkAfter [
+			appindicator
+			paperwm
+			blur-my-shell
+			bluetooth-battery
+			compiz-windows-effect
+			compiz-alike-magic-lamp-effect
+			dash-to-panel
+			executor
+			fullscreen-notifications
+			gamebar-overlay
+			headsetcontrol
+			just-perfection
+			wallpaper-slideshow
+			wireless-hid
+			wtmb-window-thumbnails
+			gsconnect
+			pano
+		];
 
 		gtk = {
 			enable = true;
