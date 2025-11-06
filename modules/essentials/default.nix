@@ -25,7 +25,6 @@ let
 		chromium
 		gnome-extension-manager
 		xclip
-		vscode
 		jq
 		podman
 		unzip

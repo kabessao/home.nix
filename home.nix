@@ -10,11 +10,6 @@ rec {
 
   mygnome.enable = true;
 
-  myniri = {
-    enable = true;
-    configFile = config.lib.file.mkOutOfStoreSymlink "${home.homeDirectory}/.config/home-manager/config/niri.kdl";
-  };
-
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
