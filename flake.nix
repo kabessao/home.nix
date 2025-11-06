@@ -13,7 +13,7 @@
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    neovim-config.url = "github:kabessao/kickstart.nvim/nixCats";
+    neovim-config.url = "github:kabessao/kickstart.nvim";
     jujutsu.url = "github:jj-vcs/jj";
 
     home-manager = {
