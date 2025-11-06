@@ -4,6 +4,7 @@ zen-browser,
 lib,
 config,
 unstable,
+jujutsu,
 ...
 }:
 
@@ -45,6 +46,7 @@ let
 		zen-browser.twilight 
 		unstable.ghostty
 		youtube-music
+    jujutsu
 
 		(writeShellScriptBin "nixwhere" ''
 			which $@ | xargs -I {} readlink -f {}

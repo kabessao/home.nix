@@ -26,7 +26,6 @@
     protontricks
     sshfs
     unstable.evolution
-    jujutsu
 
     prismlauncher
 

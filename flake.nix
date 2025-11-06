@@ -14,6 +14,7 @@
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     neovim-config.url = "github:kabessao/kickstart.nvim/nixCats";
+    jujutsu.url = "github:jj-vcs/jj";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -31,6 +32,7 @@
         zen-browser = args.zen-browser.packages.${system};
         neovim-config = args.neovim-config.packages.${system};
         extensions = args.extensions.legacyPackages.${system};
+        jujutsu = args.jujutsu.packages.${system}.jujutsu;
         modules = ./modules;
       in
 
@@ -47,7 +49,8 @@
             inherit neovim-config
                     unstable
                     zen-browser
-                    extensions;
+                    extensions
+                    jujutsu;
           };
 
           # Specify your home configuration modules here, for example,
