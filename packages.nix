@@ -24,6 +24,13 @@
     neovim-config.nvim
     nvtopPackages.nvidia
     protontricks
+    sshfs
+    unstable.evolution
+    jujutsu
+
+    prismlauncher
+
+    krita
     
     (callPackage ./chatterino2 {pkgs = unstable;})
 
