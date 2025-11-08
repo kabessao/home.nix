@@ -12,6 +12,8 @@
 
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flameshot-pin.url = "nixpkgs/b60793b86201040d9dee019a05089a9150d08b5b";
+
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     neovim-config.url = "github:kabessao/kickstart.nvim";
     jujutsu.url = "github:jj-vcs/jj";
@@ -29,6 +31,7 @@
       let
 
         unstable = args.unstable.legacyPackages.${system};
+        flameshot-pin = args.flameshot-pin.legacyPackages.${system};
         zen-browser = args.zen-browser.packages.${system};
         neovim-config = args.neovim-config.packages.${system};
         extensions = args.extensions.legacyPackages.${system};
