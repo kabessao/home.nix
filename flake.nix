@@ -27,12 +27,48 @@
     flake-utils.lib.eachDefaultSystemPassThrough (system: 
 
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+
         unstable = args.unstable.legacyPackages.${system};
         zen-browser = args.zen-browser.packages.${system};
         neovim-config = args.neovim-config.packages.${system};
         extensions = args.extensions.legacyPackages.${system};
-        jujutsu = args.jujutsu.packages.${system}.jujutsu;
+        jujutsu-repo = args.jujutsu.packages.${system};
+
+        overlay = final: prev: {
+
+          gnomeExtensions.window-is-ready-remover = prev.gnomeExtensions.window-is-ready-remover.overrideAttrs {
+            postInstall = /*bash*/ ''
+              cd $out/share/gnome-shell/extensions/windowIsReady_Remover@nunofarruca@gmail.com
+              ${prev.nushell}/bin/nu -c "open metadata.json | update shell-version { \$in ++  [ \"48\"] } | save metadata.json --force "
+            '';
+          };
+
+          chatterino2 = prev.stdenv.mkDerivation {
+            pname = "chatterino2";
+            name = "chatterino2";
+            src = "${unstable.chatterino2}";
+
+            buildPhase = ''
+              cp -r $src $out
+
+              substituteInPlace $out/share/applications/com.chatterino.chatterino.desktop \
+              --replace "Exec=chatterino" "Exec=env QT_QPA_PLATFORM=xcb chatterino" # fixes freeze happening in PaperWM
+
+            '';
+          };
+
+          nvim        = neovim-config.nvim;
+          zen-browser = zen-browser.twilight;
+          jujutsu     = jujutsu-repo.jujutsu;
+          flameshot   = flameshot-pin.flameshot;
+
+          dolphin-emu = unstable.dolphin-emu;
+          evolution   = unstable.evolution;
+          nushell     = unstable.nushell;
+          ghostty     = unstable.ghostty;
+        };
+
+        pkgs = nixpkgs.legacyPackages.${system}.extend overlay;
         modules = ./modules;
       in
 
@@ -50,7 +86,7 @@
                     unstable
                     zen-browser
                     extensions
-                    jujutsu;
+                    ;jujutsu = jujutsu-repo;
           };
 
           # Specify your home configuration modules here, for example,

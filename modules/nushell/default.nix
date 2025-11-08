@@ -1,4 +1,4 @@
-{pkgs, lib, config, unstable, ...}:
+{pkgs, lib, config, ...}:
 let
 	self = config.mynushell;
 in
@@ -17,7 +17,7 @@ in
 		};
 
 		package = lib.mkOption {
-			default = unstable.nushell;
+			default = pkgs.nushell;
 			type = lib.types.package;
 			description = "Package to be used. Default is from the Unstable branch";
 		};

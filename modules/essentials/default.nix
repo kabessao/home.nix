@@ -1,10 +1,7 @@
 {
 pkgs,
-zen-browser,
 lib,
 config,
-unstable,
-jujutsu,
 ...
 }:
 
@@ -43,10 +40,11 @@ let
 		obsidian
 		pavucontrol
 		vlc
-		zen-browser.twilight 
-		unstable.ghostty
+		zen-browser
+		ghostty
 		youtube-music
     jujutsu
+		nvim
 
 		(writeShellScriptBin "nixwhere" ''
 			which $@ | xargs -I {} readlink -f {}

@@ -52,6 +52,21 @@
         "type": "github"
       }
     },
+    "flameshot-pin": {
+      "locked": {
+        "lastModified": 1720338227,
+        "narHash": "sha256-PlL/yXNX/C87S2N8lF/HfOJhHForf/l7E6lVWZ4jMrw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b60793b86201040d9dee019a05089a9150d08b5b",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "rev": "b60793b86201040d9dee019a05089a9150d08b5b",
+        "type": "indirect"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -216,6 +231,7 @@
       "inputs": {
         "extensions": "extensions",
         "flake-utils": "flake-utils",
+        "flameshot-pin": "flameshot-pin",
         "home-manager": "home-manager",
         "jujutsu": "jujutsu",
         "neovim-config": "neovim-config",

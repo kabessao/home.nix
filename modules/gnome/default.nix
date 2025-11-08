@@ -20,6 +20,7 @@ in
 		desktop-fix.enable = lib.mkDefault true;
 
 		home.packages = with pkgs.gnomeExtensions; lib.mkAfter [
+			windows-is-ready-remover
 			appindicator
 			paperwm
 			blur-my-shell
