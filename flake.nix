@@ -39,12 +39,7 @@
 
         overlay = final: prev: {
 
-          gnomeExtensions.window-is-ready-remover = prev.gnomeExtensions.window-is-ready-remover.overrideAttrs {
-            postInstall = /*bash*/ ''
-              cd $out/share/gnome-shell/extensions/windowIsReady_Remover@nunofarruca@gmail.com
-              ${prev.nushell}/bin/nu -c "open metadata.json | update shell-version { \$in ++  [ \"48\"] } | save metadata.json --force "
-            '';
-          };
+          gnomeExtensions = unstable.gnomeExtensions;
 
           chatterino2 = prev.stdenv.mkDerivation {
             pname = "chatterino2";
