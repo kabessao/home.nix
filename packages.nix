@@ -23,6 +23,7 @@
     protontricks
     sshfs
     evolution
+    gnome-boxes
 
     prismlauncher
 
