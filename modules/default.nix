@@ -1,5 +1,11 @@
-{ ... }: 
+{ overlay, ... }: 
 {
+
+	nixpkgs.overlays = [
+		overlay
+	]
+	;
+
 	imports = [
 
 		./bash

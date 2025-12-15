@@ -74,7 +74,7 @@
         };
 
         pkgs = nixpkgs.legacyPackages.${system}.extend overlay;
-        modules = ./modules;
+        modules = import ./modules { inherit overlay; };
       in
 
       {
@@ -86,13 +86,8 @@
 
           # Optionally use extraSpecialArgs
           # to pass through arguments to home.nix
-          extraSpecialArgs = {
-            inherit neovim-config
-                    unstable
-                    zen-browser
-                    extensions
-                    ;jujutsu = jujutsu-repo;
-          };
+          # extraSpecialArgs = {
+          # };
 
           # Specify your home configuration modules here, for example,
           # the path to your home.nix.
