@@ -9,6 +9,7 @@
 		./language
 		./essentials
 		./niri
+		./tmux
 
 	];
 }
