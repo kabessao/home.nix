@@ -8,7 +8,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # Separate repo for just gnome extensions
-    extensions.url = "github:nixos/nixpkgs/1cb1c02a6b1b7cf67e3d7731cbbf327a53da9679"; 
+    extensions.url = "github:nixos/nixpkgs/1cb1c02a6b1b7cf67e3d7731cbbf327a53da9679";
 
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -23,10 +23,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    colmena = {
+      url = "github:zhaofengli/colmena";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { nixpkgs, home-manager, flake-utils, ... }@args:
-    flake-utils.lib.eachDefaultSystemPassThrough (system: 
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      flake-utils,
+      ...
+    }@args:
+    flake-utils.lib.eachDefaultSystemPassThrough (
+      system:
 
       let
 
@@ -39,15 +51,14 @@
 
         overlay = final: prev: {
 
-          gnomeExtensions = prev.gnomeExtensions //  {
+          gnomeExtensions = prev.gnomeExtensions // {
             window-is-ready-remover = prev.gnomeExtensions.window-is-ready-remover.overrideAttrs {
-              postInstall = /*bash*/ ''
-             cd $out/share/gnome-shell/extensions/windowIsReady_Remover@nunofarruca@gmail.com
-             ${unstable.nushell}/bin/nu -c "open metadata.json | update shell-version { \$in ++  [ \"48\"] } | save metadata.json --force "
-             '';
+              postInstall = /* bash */ ''
+                cd $out/share/gnome-shell/extensions/windowIsReady_Remover@nunofarruca@gmail.com
+                ${unstable.nushell}/bin/nu -c "open metadata.json | update shell-version { \$in ++  [ \"48\"] } | save metadata.json --force "
+              '';
             };
           };
-
           chatterino2 = prev.stdenv.mkDerivation {
             pname = "chatterino2";
             name = "chatterino2";
@@ -62,16 +73,17 @@
             '';
           };
 
-          nvim        = neovim-config.nvim;
+          nvim = neovim-config.nvim;
           zen-browser = zen-browser.twilight;
-          jujutsu     = jujutsu-repo.jujutsu;
-          flameshot   = flameshot-pin.flameshot;
-          stremio     = pkgs.callPackage ./customPackages/stremio-shell.nix {} ;
+          jujutsu = jujutsu-repo.jujutsu;
+          flameshot = flameshot-pin.flameshot;
+          stremio = pkgs.callPackage ./customPackages/stremio-shell.nix { };
+          colmena = args.colmena.defaultPackage.${system};
 
           dolphin-emu = unstable.dolphin-emu;
-          evolution   = unstable.evolution;
-          nushell     = unstable.nushell;
-          ghostty     = unstable.ghostty;
+          evolution = unstable.evolution;
+          nushell = unstable.nushell;
+          ghostty = unstable.ghostty;
         };
 
         pkgs = nixpkgs.legacyPackages.${system}.extend overlay;
@@ -92,11 +104,12 @@
 
           # Specify your home configuration modules here, for example,
           # the path to your home.nix.
-          modules = [ 
+          modules = [
             ./home.nix
             modules
           ];
 
         };
-    });
+      }
+    );
 }

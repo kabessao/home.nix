@@ -1,4 +1,4 @@
-{pkgs, unstable, ...}:
+{ pkgs, unstable, ... }:
 
 {
   home.packages = with pkgs; [
@@ -25,11 +25,12 @@
     evolution
     gnome-boxes
     twitch-cli
+    colmena
 
     prismlauncher
 
     krita
-    
+
     chatterino2
 
     (writeScriptBin "get-comments" ''
