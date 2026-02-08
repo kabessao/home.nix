@@ -5,7 +5,6 @@
 
     hollywood
     gamemode
-    gamescope
     clonehero
     bottles
     go
