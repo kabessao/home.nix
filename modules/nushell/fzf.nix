@@ -30,7 +30,7 @@ in
 		] ++ [ self.package ];
 
 		programs.nushell = {
-			extraConfig = lib.mkAfter /*nushell*/ ''
+			extraConfig = lib.mkAfter /* nushell */ ''
 				# Dependencies: `fd`, `bat, `rg`, `nufmt`, `tree`.
 
 				export-env {

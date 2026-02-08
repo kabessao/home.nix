@@ -5,11 +5,7 @@
 
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    flake-utils.url = "github:numtide/flake-utils";
-
-    # Separate repo for just gnome extensions
-    extensions.url = "github:nixos/nixpkgs/1cb1c02a6b1b7cf67e3d7731cbbf327a53da9679";
-
+    flake-parts.url = "github:hercules-ci/flake-parts";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     flameshot-pin.url = "nixpkgs/b60793b86201040d9dee019a05089a9150d08b5b";
@@ -17,14 +13,13 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     neovim-config.url = "github:CyberDruga/neovim.nix";
     jujutsu.url = "github:jj-vcs/jj";
-
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+    colmena = {
+      url = "github:zhaofengli/colmena";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    colmena = {
-      url = "github:zhaofengli/colmena";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -32,84 +27,33 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
-      flake-utils,
+      flake-parts,
       ...
-    }@args:
-    flake-utils.lib.eachDefaultSystemPassThrough (
-      system:
+    }@inputs:
 
-      let
+    flake-parts.lib.mkFlake { inherit inputs; } {
 
-        unstable = args.unstable.legacyPackages.${system};
-        flameshot-pin = args.flameshot-pin.legacyPackages.${system};
-        zen-browser = args.zen-browser.packages.${system};
-        neovim-config = args.neovim-config.packages.${system};
-        extensions = args.extensions.legacyPackages.${system};
-        jujutsu-repo = args.jujutsu.packages.${system};
+      systems = [ "x86_64-linux" ];
 
-        overlay = final: prev: {
+      imports = [
+        home-manager.flakeModules.home-manager
+        ./customPackages
+        ./packages.nix
+        ./modules
+      ];
 
-          gnomeExtensions = prev.gnomeExtensions // {
-            window-is-ready-remover = prev.gnomeExtensions.window-is-ready-remover.overrideAttrs {
-              postInstall = /* bash */ ''
-                cd $out/share/gnome-shell/extensions/windowIsReady_Remover@nunofarruca@gmail.com
-                ${unstable.nushell}/bin/nu -c "open metadata.json | update shell-version { \$in ++  [ \"48\"] } | save metadata.json --force "
-              '';
-            };
-          };
-          chatterino2 = prev.stdenv.mkDerivation {
-            pname = "chatterino2";
-            name = "chatterino2";
-            src = "${unstable.chatterino2}";
-
-            buildPhase = ''
-              cp -r $src $out
-
-              substituteInPlace $out/share/applications/com.chatterino.chatterino.desktop \
-              --replace "Exec=chatterino" "Exec=env QT_QPA_PLATFORM=xcb chatterino" # fixes freeze happening in PaperWM
-
-            '';
-          };
-
-          nvim = neovim-config.nvim;
-          zen-browser = zen-browser.twilight;
-          jujutsu = jujutsu-repo.jujutsu;
-          flameshot = flameshot-pin.flameshot;
-          stremio = pkgs.callPackage ./customPackages/stremio-shell.nix { };
-          colmena = args.colmena.defaultPackage.${system};
-
-          dolphin-emu = unstable.dolphin-emu;
-          evolution = unstable.evolution;
-          nushell = unstable.nushell;
-          ghostty = unstable.ghostty;
-        };
-
-        pkgs = nixpkgs.legacyPackages.${system}.extend overlay;
-        modules = import ./modules { inherit overlay; };
-      in
-
-      {
-
-        myModules = modules;
-
-        homeConfigurations."cyberdruga" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          # Optionally use extraSpecialArgs
-          # to pass through arguments to home.nix
-          # extraSpecialArgs = {
-          # };
-
-          # Specify your home configuration modules here, for example,
-          # the path to your home.nix.
+      flake = {
+        homeConfigurations.cyberdruga = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs { system = "x86_64-linux"; };
           modules = [
             ./home.nix
-            modules
+            self.homeModules.myModules
+            self.homeModules.extraPackages
           ];
-
         };
-      }
-    );
+      };
+    };
 }

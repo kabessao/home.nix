@@ -1,40 +1,55 @@
-{ pkgs, unstable, ... }:
-
+{ moduleWithSystem, ... }:
 {
-  home.packages = with pkgs; [
+  flake.homeModules.extraPackages = moduleWithSystem (
+    {
+      self',
+      ...
+    }:
+    { lib, pkgs, ... }:
+    {
 
-    hollywood
-    gamemode
-    clonehero
-    bottles
-    go
-    playwright-driver
-    hmcl
-    kdePackages.kdenlive
-    dolphin-emu
-    speedtest-cli
-    stremio
-    yt-dlp
-    translate-shell
-    oversteer
-    mangohud
-    nvtopPackages.nvidia
-    protontricks
-    sshfs
-    evolution
-    gnome-boxes
-    twitch-cli
-    colmena
+      nixpkgs.config.allowUnfree = true;
+      home.packages =
+        with pkgs;
+        [
 
-    prismlauncher
+          hollywood
+          gamemode
+          clonehero
+          bottles
+          go
+          playwright-driver
+          hmcl
+          kdePackages.kdenlive
+          speedtest-cli
+          yt-dlp
+          translate-shell
+          oversteer
+          mangohud
+          # nvtopPackages.nvidia
+          protontricks
+          sshfs
+          gnome-boxes
+          twitch-cli
+          gcc
 
-    krita
+          prismlauncher
 
-    chatterino2
+          krita
 
-    (writeScriptBin "get-comments" ''
-      ${yt-dlp}/bin/yt-dlp --write-comments --no-download $@
-    '')
+          (writeScriptBin "get-comments" ''
+            ${yt-dlp}/bin/yt-dlp --write-comments --no-download $@
+          '')
 
-  ];
+          chatterino2
+
+        ]
+        ++ (with self'.packages; [
+          stremio
+          colmena
+          dolphin-emu
+          evolution
+        ]);
+    }
+  );
 }

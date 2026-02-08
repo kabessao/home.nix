@@ -1,56 +1,62 @@
-{pkgs, lib, config, ...}:
-
+{ ... }:
 {
 
-	imports = [
-		./blesh.nix
-	];
+  flake.homeModules.myBash =
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
 
-	options.mybash = {
-		enable = lib.mkOption {
-			default = true;
-			type = lib.types.bool;
-			description = "Enables my personal bash configuration";
-		};
-	};
+    {
 
-	config = lib.mkIf config.mybash.enable {
+      imports = [
+        ./blesh.nix
+      ];
 
-		programs.fzf = {
-			enable = lib.mkDefault true;
-			enableBashIntegration = lib.mkDefault true;
-		};
+      options.mybash = {
+        enable = lib.mkOption {
+          default = true;
+          type = lib.types.bool;
+          description = "Enables my personal bash configuration";
+        };
+      };
 
-		mybash.blesh.enable = lib.mkDefault true;
+      config = lib.mkIf config.mybash.enable {
 
-		programs.bash = {
-			enable = true;
-			bashrcExtra = ''
+        programs.fzf = {
+          enable = lib.mkDefault true;
+          enableBashIntegration = lib.mkDefault true;
+        };
 
-				# User specific environment
-				if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-				then
-						PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-				fi
-				export PATH
+        mybash.blesh.enable = lib.mkDefault true;
 
-				cdw() { 
-					git status 2> /dev/null > /dev/null \
-						&& cd `git rev-parse --show-toplevel` \
-						|| cd ~/workspace/
-				}
+        programs.bash = {
+          enable = true;
+          bashrcExtra = ''
+            # User specific environment
+            if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+            then
+                PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+            fi
+            export PATH
 
-			'';
+            cdw() { 
+              git status 2> /dev/null > /dev/null \
+                && cd $(git rev-parse --show-toplevel) \
+                || cd ~/workspace/
+            }
+          '';
 
-			shellAliases = {
-				r = ". ${pkgs.ranger}/bin/.ranger-wrapped";
-				o = "xdg-open";
-				ta = "tmux a || tmux";
-				lz = "lazygit";
-			};
+          shellAliases = {
+            r = ". ${pkgs.ranger}/bin/.ranger-wrapped";
+            o = "xdg-open";
+            ta = "tmux a || tmux";
+            lz = "lazygit";
+          };
 
-		};
-	};
+        };
+      };
+    };
 }
-
-

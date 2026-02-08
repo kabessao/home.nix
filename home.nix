@@ -1,18 +1,18 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 
-rec {
-
-  imports = [
-    ./packages.nix
-  ];
+{
 
   nixpkgs.config.allowUnfree = true;
 
   mygnome.enable = true;
+  mynushell.enable = true;
 
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   targets.genericLinux.enable = true;
@@ -57,7 +57,7 @@ rec {
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
-    NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1;
+    NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM = 1;
   };
 
   # systemd.user.timers."calendario" = {
