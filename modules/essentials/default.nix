@@ -1,6 +1,7 @@
 { moduleWithSystem, ... }:
 {
-  flake.homeModules.myEssentials = moduleWithSystem ({self', ...}: 
+  flake.homeModules.myEssentials = moduleWithSystem (
+    { self', ... }:
     {
       pkgs,
       lib,
@@ -14,47 +15,49 @@
         pkgs = null;
       };
       self = config.myessentials;
-      packages = with pkgs; [
+      packages =
+        with pkgs;
+        [
 
-        bitwarden-desktop
-        lazygit
-        firefox
-        vesktop
-        ferdium
-        headsetcontrol
-        gnome-tweaks
-        chromium
-        gnome-extension-manager
-        xclip
-        jq
-        podman
-        unzip
-        obs-studio
-        distrobox
-        ripgrep
-        steam-run
-        libnotify
-        openvpn
-        gum
-        onlyoffice-desktopeditors
-        easyeffects
-        dconf-editor
-        obsidian
-        pavucontrol
-        vlc
-        youtube-music
+          bitwarden-desktop
+          lazygit
+          firefox
+          vesktop
+          ferdium
+          headsetcontrol
+          gnome-tweaks
+          chromium
+          gnome-extension-manager
+          xclip
+          jq
+          podman
+          unzip
+          obs-studio
+          distrobox
+          ripgrep
+          steam-run
+          libnotify
+          openvpn
+          gum
+          onlyoffice-desktopeditors
+          easyeffects
+          dconf-editor
+          obsidian
+          pavucontrol
+          vlc
+          youtube-music
+          flameshot
 
-        (writeShellScriptBin "nixwhere" ''
-          			which $@ | xargs -I {} readlink -f {}
-
-          		'')
-		] ++ (with self'.packages;[
-        flameshot
-        ghostty
-        jujutsu
-        zen-browser
-        nvim
-			]);
+          (writeShellScriptBin "nixwhere" ''
+            which $@ | xargs -I {} readlink -f {}
+          '')
+        ]
+        ++ (with self'.packages; [
+          ghostty
+          jujutsu
+          zen-browser
+          nvim
+        ]);
     in
 
     {
@@ -90,5 +93,6 @@
 
         home.packages = utils.removePackagesByName packages self.excludePackages;
       };
-    });
+    }
+  );
 }

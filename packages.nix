@@ -33,6 +33,8 @@
           twitch-cli
           gcc
 
+          stremio-linux-shell
+
           prismlauncher
 
           krita
@@ -41,11 +43,9 @@
             ${yt-dlp}/bin/yt-dlp --write-comments --no-download $@
           '')
 
-          chatterino2
-
         ]
         ++ (with self'.packages; [
-          stremio
+          chatterino2
           colmena
           dolphin-emu
           evolution

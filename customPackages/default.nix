@@ -33,12 +33,10 @@ in
 
         nvim = neovim-config.nvim;
         zen-browser = zen-browser.twilight;
-        jujutsu = jujutsu-repo.jujutsu;
-        flameshot = flameshot-pin.flameshot;
-        stremio = pkgs.callPackage ./stremio-shell.nix { };
         colmena = inputs.colmena.defaultPackage.${system};
 
         inherit (unstable)
+          jujutsu
           dolphin-emu
           evolution
           nushell
