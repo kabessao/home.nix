@@ -46,13 +46,13 @@
           pavucontrol
           vlc
           youtube-music
-          flameshot
 
           (writeShellScriptBin "nixwhere" ''
             which $@ | xargs -I {} readlink -f {}
           '')
         ]
         ++ (with self'.packages; [
+          flameshot
           ghostty
           jujutsu
           zen-browser

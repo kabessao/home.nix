@@ -5,9 +5,7 @@
 
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    flake-parts.url = "github:hercules-ci/flake-parts";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
     flameshot-pin.url = "nixpkgs/b60793b86201040d9dee019a05089a9150d08b5b";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -17,6 +15,8 @@
       url = "github:zhaofengli/colmena";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";

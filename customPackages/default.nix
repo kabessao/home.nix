@@ -4,13 +4,13 @@ let
 in
 {
   perSystem =
-    { inputs', pkgs, ... }:
+    { inputs', ... }:
     let
       unstable = inputs'.unstable.legacyPackages;
       flameshot-pin = inputs'.flameshot-pin.legacyPackages;
       zen-browser = inputs'.zen-browser.packages;
       neovim-config = inputs'.neovim-config.packages;
-      jujutsu-repo = inputs'.jujutsu.packages;
+      # jujutsu-repo = inputs'.jujutsu.packages;
     in
     {
       packages = {
@@ -33,12 +33,16 @@ in
 
         nvim = neovim-config.nvim;
         zen-browser = zen-browser.twilight;
+        flameshot = flameshot-pin.flameshot;
         colmena = inputs.colmena.defaultPackage.${system};
+
+        copyous = unstable.gnomeExtensions.copyous;
 
         inherit (unstable)
           jujutsu
           dolphin-emu
           evolution
+          gamescope
           nushell
           ghostty
           ;

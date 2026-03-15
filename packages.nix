@@ -46,6 +46,7 @@
         ]
         ++ (with self'.packages; [
           chatterino2
+          gamescope
           colmena
           dolphin-emu
           evolution

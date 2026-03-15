@@ -1,6 +1,7 @@
-{ ... }:
+{ moduleWithSystem, ... }:
 {
-  flake.homeModules.myGnome =
+  flake.homeModules.myGnome = moduleWithSystem (
+    { self', ... }:
     {
       pkgs,
       lib,
@@ -29,26 +30,30 @@
 
         home.packages =
           with pkgs.gnomeExtensions;
-          lib.mkAfter [
-            window-is-ready-remover
-            appindicator
-            paperwm
-            blur-my-shell
-            bluetooth-battery
-            compiz-windows-effect
-            compiz-alike-magic-lamp-effect
-            dash-to-panel
-            executor
-            fullscreen-notifications
-            gamebar-overlay
-            headsetcontrol
-            just-perfection
-            wallpaper-slideshow
-            wireless-hid
-            wtmb-window-thumbnails
-            gsconnect
-            pano
-          ];
+          lib.mkAfter (
+            [
+              window-is-ready-remover
+              appindicator
+              paperwm
+              blur-my-shell
+              bluetooth-battery
+              compiz-windows-effect
+              compiz-alike-magic-lamp-effect
+              dash-to-panel
+              executor
+              fullscreen-notifications
+              gamebar-overlay
+              headsetcontrol
+              just-perfection
+              wallpaper-slideshow
+              wireless-hid
+              wtmb-window-thumbnails
+              gsconnect
+            ]
+            ++ (with self'.packages; [
+              copyous
+            ])
+          );
 
         gtk = {
           enable = true;
@@ -68,5 +73,6 @@
         };
 
       };
-    };
+    }
+  );
 }
