@@ -4,7 +4,7 @@ let
 in
 {
   perSystem =
-    { inputs', ... }:
+    { inputs', pkgs, ... }:
     let
       unstable = inputs'.unstable.legacyPackages;
       flameshot-pin = inputs'.flameshot-pin.legacyPackages;
@@ -37,6 +37,8 @@ in
         colmena = inputs.colmena.defaultPackage.${system};
 
         copyous = unstable.gnomeExtensions.copyous;
+
+        freeJ2ME = pkgs.callPackage ./FreeJ2ME.nix { };
 
         inherit (unstable)
           jujutsu

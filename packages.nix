@@ -5,7 +5,7 @@
       self',
       ...
     }:
-    { lib, pkgs, ... }:
+    { pkgs, ... }:
     {
 
       nixpkgs.config.allowUnfree = true;
@@ -50,6 +50,7 @@
           colmena
           dolphin-emu
           evolution
+          freeJ2ME
         ]);
     }
   );
