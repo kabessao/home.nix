@@ -12,7 +12,8 @@
       home.packages =
         with pkgs;
         [
-
+          ffmpeg-headless
+          ffmpegthumbnailer
           hollywood
           gamemode
           clonehero
@@ -36,6 +37,7 @@
           stremio-linux-shell
 
           prismlauncher
+          thunderbird
 
           krita
 
@@ -49,7 +51,6 @@
           gamescope
           colmena
           dolphin-emu
-          evolution
           freeJ2ME
         ]);
     }
