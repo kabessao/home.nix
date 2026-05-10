@@ -17,6 +17,7 @@
     };
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -24,36 +25,5 @@
     };
 
   };
-
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      flake-parts,
-      ...
-    }@inputs:
-
-    flake-parts.lib.mkFlake { inherit inputs; } {
-
-      systems = [ "x86_64-linux" ];
-
-      imports = [
-        home-manager.flakeModules.home-manager
-        ./customPackages
-        ./packages.nix
-        ./modules
-      ];
-
-      flake = {
-        homeConfigurations.cyberdruga = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
-          modules = [
-            ./home.nix
-            self.homeModules.myModules
-            self.homeModules.extraPackages
-          ];
-        };
-      };
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }

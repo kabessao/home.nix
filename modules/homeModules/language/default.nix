@@ -1,5 +1,12 @@
 { self, ... }:
 {
+
+  flake.homeModules.allModules =
+    { ... }:
+    {
+      imports = [ self.homeModules.myLanguageConfig ];
+    };
+
   flake.homeModules.myLanguageConfig =
     { lib, config, ... }:
     let

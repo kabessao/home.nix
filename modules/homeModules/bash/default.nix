@@ -1,5 +1,10 @@
-{ ... }:
+{ self, ... }:
 {
+  flake.homeModules.allModules =
+    { ... }:
+    {
+      imports = [ self.homeModules.myBash ];
+    };
 
   flake.homeModules.myBash =
     {
@@ -12,7 +17,7 @@
     {
 
       imports = [
-        ./blesh.nix
+        self.homeModules.myBlesh
       ];
 
       options.mybash = {

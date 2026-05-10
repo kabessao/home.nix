@@ -1,6 +1,14 @@
-{ ... }:
+{ moduleWithSystem, self, ... }:
 {
-  flake.homeModules.myDesktopFixes =
+
+  flake.homeModules.allModules =
+    { ... }:
+    {
+      imports = [ self.homeModules.myDesktopFixes ];
+    };
+
+  flake.homeModules.myDesktopFixes = moduleWithSystem (
+    { self', ... }:
     {
       lib,
       config,
@@ -30,7 +38,7 @@
             WantedBy = [ "default.target" ];
           };
           Service = {
-            ExecStart = "${pkgs.callPackage ./reset-desktop.nix { path = config.home.homeDirectory; }}";
+            ExecStart = "${self'.packages.reset-desktop}";
           };
         };
 
@@ -75,5 +83,7 @@
 
       };
 
-    };
+    }
+
+  );
 }

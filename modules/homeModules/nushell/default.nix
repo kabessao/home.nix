@@ -1,20 +1,27 @@
-{ moduleWithSystem, ... }:
+{ self, moduleWithSystem, ... }:
 {
+
+  flake.homeModules.allModules =
+    { ... }:
+    {
+      imports = [ self.homeModules.myNushell ];
+    };
+
   flake.homeModules.myNushell = moduleWithSystem (
-    { self', ... }:
+    { inputs', ... }:
     {
       lib,
       config,
       ...
     }:
     let
-      self = config.mynushell;
+      this = config.mynushell;
     in
     {
 
-      imports = [
-        ./fzf.nix
-        ./ranger.nix
+      imports = with self.homeModules; [
+        myNushellFzf
+        myNushellRanger
       ];
 
       options.mynushell = {
@@ -26,7 +33,7 @@
         };
 
         package = lib.mkOption {
-          default = self'.packages.nushell;
+          default = inputs'.unstable.legacyPackages.nushell;
           type = lib.types.package;
           description = "Package to be used. Default is from the Unstable branch";
         };
@@ -46,16 +53,16 @@
 
         programs.nushell = {
           enable = true;
-          package = self.package;
+          package = this.package;
 
           extraConfig = lib.mkAfter ''
             # Navigates back until it reaches the root of a git repository
-            # if none is found it goes to ${self.cdw.workspaceFolder}
+            # if none is found it goes to ${this.cdw.workspaceFolder}
             def --env cdw []: nothing -> nothing  {
               if (git status | complete | get exit_code) == 0 {
                 cd (git rev-parse --show-toplevel)
               } else {
-                cd ${self.cdw.workspaceFolder}
+                cd ${this.cdw.workspaceFolder}
               }
             }
           '';

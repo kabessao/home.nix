@@ -170,6 +170,21 @@
         "type": "github"
       }
     },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1778781969,
+        "narHash": "sha256-Jjuz5CmSkur8KvLDoGa+vylEp+RkQtv4mt/qcMznpH0=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "d321337efd0f23a9eb14a42adb7b2c29313ab274",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
     "jujutsu": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -383,6 +398,7 @@
         "flake-parts": "flake-parts",
         "flameshot-pin": "flameshot-pin",
         "home-manager": "home-manager",
+        "import-tree": "import-tree",
         "jujutsu": "jujutsu",
         "neovim-config": "neovim-config",
         "nixpkgs": "nixpkgs_4",

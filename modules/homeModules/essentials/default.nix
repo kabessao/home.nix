@@ -1,7 +1,14 @@
-{ moduleWithSystem, ... }:
+{ moduleWithSystem, self, ... }:
 {
+
+  flake.homeModules.allModules =
+    { ... }:
+    {
+      imports = [ self.homeModules.myEssentials ];
+    };
+
   flake.homeModules.myEssentials = moduleWithSystem (
-    { self', ... }:
+    { self', inputs', ... }:
     {
       pkgs,
       lib,
@@ -10,15 +17,16 @@
     }:
 
     let
+
       utils = import "${pkgs.path}/nixos/lib/utils.nix" {
         inherit config lib;
         pkgs = null;
       };
+
       self = config.myessentials;
       packages =
         with pkgs;
         [
-
           bitwarden-desktop
           lazygit
           firefox
@@ -51,12 +59,18 @@
             which $@ | xargs -I {} readlink -f {}
           '')
         ]
-        ++ (with self'.packages; [
-          flameshot
+        ++ (with inputs'.neovim-config.packages; [
+          nvim
+        ])
+        ++ (with inputs'.zen-browser.packages; [
+          twilight
+        ])
+        ++ (with inputs'.unstable.legacyPackages; [
           ghostty
           jujutsu
-          zen-browser
-          nvim
+        ])
+        ++ (with inputs'.flameshot-pin.legacyPackages; [
+          flameshot
         ]);
     in
 
@@ -89,6 +103,16 @@
         programs.zoxide = {
           enable = true;
           enableBashIntegration = true;
+        };
+
+        nixpkgs.config.allowUnfree = true;
+
+        nix = {
+          package = pkgs.nix;
+          settings.experimental-features = [
+            "nix-command"
+            "flakes"
+          ];
         };
 
         home.packages = utils.removePackagesByName packages self.excludePackages;
