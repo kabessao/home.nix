@@ -27,6 +27,7 @@
       packages =
         with pkgs;
         [
+          thunderbird
           bitwarden-desktop
           lazygit
           firefox
@@ -108,7 +109,7 @@
         nixpkgs.config.allowUnfree = true;
 
         nix = {
-          package = pkgs.nix;
+          package = lib.mkDefault pkgs.nix;
           settings.experimental-features = [
             "nix-command"
             "flakes"

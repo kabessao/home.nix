@@ -27,7 +27,6 @@
         gcc
         stremio-linux-shell
         prismlauncher
-        thunderbird
         krita
         (writeScriptBin "get-comments" ''
           ${yt-dlp}/bin/yt-dlp --write-comments --no-download $@
