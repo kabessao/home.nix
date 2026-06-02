@@ -60,6 +60,15 @@
             which $@ | xargs -I {} readlink -f {}
           '')
 
+          # this fixes a common issue with flameshot where it doesn't execute from gnome
+          (writeShellApplication {
+            name = "flameshot";
+            runtimeInputs = [ inputs'.flameshot-pin.legacyPackages.flameshot ];
+            text = ''
+              flameshot "$@"
+            '';
+          })
+
           inputs'.neovim-config.packages.nvim
 
           inputs'.zen-browser.packages.twilight
