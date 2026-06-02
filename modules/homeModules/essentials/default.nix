@@ -59,19 +59,15 @@
           (writeShellScriptBin "nixwhere" ''
             which $@ | xargs -I {} readlink -f {}
           '')
+
+          inputs'.neovim-config.packages.nvim
+
+          inputs'.zen-browser.packages.twilight
+
         ]
-        ++ (with inputs'.neovim-config.packages; [
-          nvim
-        ])
-        ++ (with inputs'.zen-browser.packages; [
-          twilight
-        ])
         ++ (with inputs'.unstable.legacyPackages; [
           ghostty
           jujutsu
-        ])
-        ++ (with inputs'.flameshot-pin.legacyPackages; [
-          flameshot
         ]);
     in
 
