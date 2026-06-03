@@ -61,13 +61,11 @@
           '')
 
           # this fixes a common issue with flameshot where it doesn't execute from gnome
-          (writeShellApplication {
-            name = "flameshot";
-            runtimeInputs = [ inputs'.flameshot-pin.legacyPackages.flameshot ];
-            text = ''
-              flameshot "$@"
-            '';
-          })
+          inputs'.flameshot-pin.legacyPackages.flameshot
+
+          (writeShellScriptBin "flameshot-fix" ''
+            flameshot "$@"
+          '')
 
           inputs'.neovim-config.packages.nvim
 
