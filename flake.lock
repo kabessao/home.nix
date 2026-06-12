@@ -185,6 +185,22 @@
         "type": "github"
       }
     },
+    "jj-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780902568,
+        "narHash": "sha256-eT3J6+CsU3h3ecBE1/tdJ0lFaBtXR9W3aUYcCdTG7Js=",
+        "owner": "NicolasGB",
+        "repo": "jj.nvim",
+        "rev": "33179e2f15cd48b1a661f5a47088aa981c4ec0b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NicolasGB",
+        "repo": "jj.nvim",
+        "type": "github"
+      }
+    },
     "jujutsu": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -207,16 +223,17 @@
     },
     "neovim-config": {
       "inputs": {
+        "jj-nvim": "jj-nvim",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1780417676,
-        "narHash": "sha256-tJBlVScjBvYgzx4vlaIEeqRUBRu2WNoCANh8Y0TG1d8=",
+        "lastModified": 1781282018,
+        "narHash": "sha256-JO2w57MLpZa6h38idZyc2Lpi/6bzWSLijK+ASQUxDw0=",
         "owner": "CyberDruga",
         "repo": "neovim.nix",
-        "rev": "4066c3578fb138bd7b740ca40961c8321c62c46d",
+        "rev": "dd6b998058d611480d2649b5ca06beaf199d5bdd",
         "type": "github"
       },
       "original": {
