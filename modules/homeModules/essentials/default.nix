@@ -28,7 +28,6 @@
         with pkgs;
         [
           thunderbird
-          bitwarden-desktop
           lazygit
           firefox
           vesktop

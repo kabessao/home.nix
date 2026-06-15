@@ -1,13 +1,13 @@
 { moduleWithSystem, ... }:
 {
 
-  flake.homeModules.extraPackages = moduleWithSystem (
-    { self', ... }:
-    { ... }:
-    {
-      home.packages = [ self'.packages.FreeJ2ME ];
-    }
-  );
+  # flake.homeModules.extraPackages = moduleWithSystem (
+  #   { self', ... }:
+  #   { ... }:
+  #   {
+  #     home.packages = [ self'.packages.FreeJ2ME ];
+  #   }
+  # );
 
   perSystem =
     { pkgs, ... }:
