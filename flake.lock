@@ -229,11 +229,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1781348333,
-        "narHash": "sha256-ekPQQTHsL60aXTx4VhZJrU4r8Wq5qzlM9LlgvGDuAW8=",
+        "lastModified": 1781658764,
+        "narHash": "sha256-FrQGyQPr6gXUJC5Hxj1c6y7mJgEaN/SqykSx8HdRn1Y=",
         "owner": "CyberDruga",
         "repo": "neovim.nix",
-        "rev": "cfd0569e901bc38fda923ac108ec84510eeac3d9",
+        "rev": "f79efaf8b9cd9e76cc8221f08d94d9a6ce6eafb4",
         "type": "github"
       },
       "original": {
