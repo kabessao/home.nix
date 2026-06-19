@@ -28,6 +28,7 @@
         stremio-linux-shell
         prismlauncher
         krita
+        opencode
         (writeScriptBin "get-comments" ''
           ${yt-dlp}/bin/yt-dlp --write-comments --no-download $@
         '')

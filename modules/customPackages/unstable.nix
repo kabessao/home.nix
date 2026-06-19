@@ -6,7 +6,7 @@
     { ... }:
     {
       home.packages = with inputs'.unstable.legacyPackages; [
-        gamescope
+        # gamescope
         dolphin-emu
       ];
     }
