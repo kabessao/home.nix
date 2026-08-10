@@ -20,6 +20,7 @@
         oversteer
         mangohud
         # nvtopPackages.nvidia
+        podman-compose
         protontricks
         sshfs
         gnome-boxes
