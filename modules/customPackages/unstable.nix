@@ -8,6 +8,7 @@
       home.packages = with inputs'.unstable.legacyPackages; [
         # gamescope
         dolphin-emu
+        stremio-linux-shell
       ];
     }
   );

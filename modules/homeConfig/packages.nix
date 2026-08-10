@@ -25,7 +25,6 @@
         gnome-boxes
         twitch-cli
         gcc
-        stremio-linux-shell
         prismlauncher
         krita
         opencode
