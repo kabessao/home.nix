@@ -16,7 +16,7 @@
       ...
     }:
     let
-      self = config.mygnome;
+      this = config.mygnome;
     in
     {
       # imports = [
@@ -31,7 +31,7 @@
         };
       };
 
-      config = lib.mkIf self.enable {
+      config = lib.mkIf this.enable {
 
         desktop-fix.enable = lib.mkDefault true;
 
